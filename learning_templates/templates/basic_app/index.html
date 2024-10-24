@@ -1,7 +1,74 @@
 <!DOCTYPE html>
 {% extends "basic_app/base.html" %}
-  {% block body_block %}
-    <h1>Welcome to heading</h1>
-    <h1>{{ text|cut:'hello'}}</h1>
-    <h1>{{ number|add:"99" }}</h1>
-  {% endblock %}
+
+{% block extra_css %}
+    <style>
+      .welcome {
+          background: linear-gradient(90deg,#27b027, #aee8ae);
+          border-radius: 10px;
+          box-shadow: 5px 5px #c5d4cd;
+          overflow: hidden; /* Ensure content doesn't overflow while animating */
+      }
+
+      /* Keyframe animation for moving text from left to right */
+      @keyframes slide-in {
+          0% {
+              transform: translateX(-100%); /* Start off-screen to the left */
+              opacity: 0; /* Fully transparent */
+          }
+          100% {
+              transform: translateX(0); /* Final position */
+              opacity: 1; /* Fully visible */
+          }
+      }
+
+      /* Apply animation to the text */
+      .welcome h1, .welcome h4 {
+          opacity: 0;
+          animation: slide-in 1s ease-out forwards; /* Animate over 1 second */
+      }
+
+      .welcome h1 {
+          animation-delay: 0.2s; /* Delay for h1 */
+      }
+
+      .welcome h4 {
+          animation-delay: 0.4s; /* Slight delay for h4 after h1 */
+      }
+
+      .github-button {
+          margin-top: 15px;
+          padding: 10px 20px;
+          background-color: #333;
+          color: #fff;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: all 0.2s ease;
+          position: relative;
+          display:inline-block;
+      }
+
+      .github-button:hover {
+          box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+          transform: translateY(-5px); /* Slight upward movement and scale up */
+      }
+      .github-button:active {
+          transform: translateY(0); /* Reset when active */
+      }
+
+    </style>
+{% endblock %}
+
+
+{% block body_block %}
+    <div class="container welcome p-4 mt-2">
+        <h1>Hello<br>I'm Biswarup</h1>
+        <h4>I am a software developer. You can view some <br>of my projects on GitHub. Link below.</h4>
+        <br>
+        <a href="https://github.com/Biswarup95" class="github-button" target="_blank">Visit My GitHub</a>
+    </div>
+
+    <a href="{% url 'game:game_home' %}" class="btn btn-primary">Play the Game</a>
+
+{% endblock %}

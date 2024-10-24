@@ -1,0 +1,18 @@
+<form method="POST">
+    {% csrf_token %}
+    <label for="name">Enter your name:</label>
+    <input type="text" name="name" required>
+    <button type="submit">Play</button>
+</form>
+  
+<hr>
+  
+<h3>Select a previously played name:</h3>
+<ul>
+    {% for player in players %}
+    <li><a href="{% url 'game:game_home' %}" onclick="document.getElementById('name').value='{{ player.name }}';">{{ player.name }}</a></li>
+    {% endfor %}
+</ul>
+  
+<!-- Link to leaderboard -->
+<a href="{% url 'game:leaderboard' %}">Go to Leaderboard</a>
